@@ -1,13 +1,12 @@
 package com.example.springbootspillit.service;
 
 import com.example.springbootspillit.model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Service;
 
-@Service
-public interface UserService extends UserDetailsService {
+public interface UserService extends UserDetailsService{
 
-    //calling getter from User model
+
     public User getUser(String username);
 
     public Iterable<User> listUsers();
@@ -15,4 +14,10 @@ public interface UserService extends UserDetailsService {
     public User createUser(User newUser);
 
     public String login(User user);
+
+    //public HttpStatus findById(Long userId);
+
+    public HttpStatus deleteById(Long userId);
+
+    public User addPost(String username, Long postId);
 }

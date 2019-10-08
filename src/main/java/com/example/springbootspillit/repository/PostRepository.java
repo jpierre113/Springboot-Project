@@ -1,4 +1,8 @@
 package com.example.springbootspillit.repository;
 
-public interface PostRepository {
-}
+
+import com.example.springbootspillit.model.Posts;
+import org.springframework.data.repository.CrudRepository;
+
+public interface PostRepository extends CrudRepository<Posts, Long > {
+
