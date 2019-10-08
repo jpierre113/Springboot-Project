@@ -4,7 +4,6 @@ package com.example.springbootspillit.service;
 import com.example.springbootspillit.model.User;
 import com.example.springbootspillit.model.UserProfile;
 import com.example.springbootspillit.repository.UserProfileRepository;
-import com.example.springbootspillit.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

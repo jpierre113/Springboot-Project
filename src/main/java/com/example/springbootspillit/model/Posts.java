@@ -1,9 +1,6 @@
 package com.example.springbootspillit.model;
 
-import org.hibernate.type.descriptor.sql.VarcharTypeDescriptor;
-
 import javax.persistence.*;
-
 import java.util.List;
 
 @Entity

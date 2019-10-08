@@ -10,4 +10,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
     public User login(String username, String password);
     public User findByUsername(String username);
 
-
+}
