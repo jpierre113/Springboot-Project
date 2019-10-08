@@ -35,10 +35,13 @@ public class User {
             CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "user_role_id", nullable = false)
     private UserRole userRole;
+    @JoinColumn(name="user_post_id")
+    private Post userPost;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,
                     CascadeType.MERGE, CascadeType.REFRESH})
+  
     @JoinTable(name = "users",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = @JoinColumn(name = "post_id"))
@@ -66,6 +69,25 @@ public class User {
     public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile; }
 
     public Long getId() {
+
+    @JoinTable(name = "user_post",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private List<Post> posts;
+
+    public User(){}
+
+    public List<Post> addPost(Post post){
+        if(posts == null)
+            posts = new ArrayList<>();
+
+        posts.add(post);
+
+        return posts;
+    }
+
+    //getters and setters
+    public Integer getId(){
         return id;
     }
 
@@ -91,7 +113,13 @@ public class User {
 
     public void setUserRole(UserRole userRole) {
     }
-
+        this.userRole = userRole;
 
     }
 
+
+    //getters & setters for post
+    public List<Post> getPosts(){ return posts; }
+
+    public void setPosts(List<Post> posts) { this.posts = posts; }
+}

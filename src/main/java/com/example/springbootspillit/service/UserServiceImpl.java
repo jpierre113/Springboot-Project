@@ -7,25 +7,10 @@ import com.example.springbootspillit.model.UserRole;
 import com.example.springbootspillit.repository.PostRepository;
 import com.example.springbootspillit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.springbootspillit.repository.PostRepository.*;
-
-@Service
-public class UserServiceImpl implements com.example.springbootspillit.service.UserService {
-
-    @Autowired
-    com.example.springbootspillit.repository.UserRepository userRepository;
 
     @Autowired
     com.example.springbootspillit.service.UserRoleService userRoleService;
@@ -42,6 +27,9 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
     @Autowired
     @Qualifier("encoder")
     PasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -73,42 +61,20 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
     }
 
     @Override
-    public String createUser(User newUser) {
-        UserRole userRole = userRoleService.getRole(newUser.getUserRole().getName());
-        newUser.setUserRole(userRole);
-        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        if(userRepository.save(newUser) != null){
-            UserDetails userDetails = loadUserByUsername(newUser.getUsername());
-            return jwtUtil.generateToken(userDetails);
-        }
+
+    public User createUser(User newUser) {
+        return userRepository.save(newUser);
+    }
+
+    @Override
+    public String login(User user) {
         return null;
     }
 
     @Override
-    public String login(User user){
-        User newUser = userRepository.findByUsername(user.getUsername());
-        //userRepository.login(user.getUsername(), user.getPassword()) != null
-        if(newUser != null && bCryptPasswordEncoder.matches(user.getPassword(), newUser.getPassword())){
-            UserDetails userDetails = loadUserByUsername(newUser.getUsername());
-            return jwtUtil.generateToken(userDetails);
-        }
-        return null;
-    }
-
-
-
-    @Override
-    public User addPost(String username, Long postId) {
-        Posts post = postRepository.findById(postId).get();
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = getUser(username);
-        user.addPost(post);
+        return null;
 
-        return userRepository.save(user);
-    }
-
-    @Override
-    public HttpStatus deleteById(Long userId){
-        userRepository.deleteById(userId);
-        return HttpStatus.OK;
     }
 }
