@@ -23,14 +23,24 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     User user;
 
+    /**
+     *
+     * @param username
+     * @param newProfile
+     * @return add newProfile to user
+     */
     @Override
     public UserProfile createUserProfile(String username, UserProfile newProfile) {
         User user = userRepository.findByUsername(username);
-        //Null pointer problem
         user.setUserProfile(newProfile);
         return userProfileRepository.save(newProfile);
     }
 
+    /**
+     *
+     * @param username
+     * @return userProfile
+     */
     @Override
     public UserProfile getUserProfile(String username) {
         return userProfileRepository.findProfileByUsername(username);

@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/post")
 public class PostController {
 
     @Autowired
     private com.example.springbootspillit.service.PostService postService;
 
-    @GetMapping("/post/list")
+    @GetMapping("/list")
     public Iterable<Posts> listPosts(){
         return postService.listPosts();
     }
@@ -23,8 +24,8 @@ public class PostController {
     }
 
 
-    @DeleteMapping("/post/{postId}")
-    public void deletePostById(@PathVariable long postId){
+    @DeleteMapping("/{postId}")
+    public void deletePostById(@PathVariable Long postId){
         postService.deleteById(postId);
     }
 
