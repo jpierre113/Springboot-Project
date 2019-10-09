@@ -15,7 +15,7 @@ public class Posts {
     private String title;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="users_id")
+    @JoinColumn(name="profile_id")
     private UserProfile userProfile;
 
     @Column
@@ -24,10 +24,10 @@ public class Posts {
     @Column
     private Long user_id;
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @ManyToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,
                     CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "post",
+    @JoinTable(name = "users_post",
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User user;
@@ -44,10 +44,10 @@ public class Posts {
         this.id = id;
     }
 
-    public String getTile() {
+    public String getTitle() {
         return title;
     }
-    public void setTitle(String code) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
