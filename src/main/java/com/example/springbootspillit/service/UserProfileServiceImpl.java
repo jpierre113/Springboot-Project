@@ -4,6 +4,7 @@ package com.example.springbootspillit.service;
 import com.example.springbootspillit.model.User;
 import com.example.springbootspillit.model.UserProfile;
 import com.example.springbootspillit.repository.UserProfileRepository;
+import com.example.springbootspillit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,16 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Autowired
     UserProfileService userProfileService;
 
+    @Autowired
+    UserRepository userRepository;
+
+
+    User user;
+
     @Override
     public UserProfile createUserProfile(String username, UserProfile newProfile) {
-        User user = userProfileService.getUser(username);
+        User user = userRepository.findByUsername(username);
+        //Null pointer problem
         user.setUserProfile(newProfile);
         return userProfileRepository.save(newProfile);
     }
@@ -28,13 +36,5 @@ public class UserProfileServiceImpl implements UserProfileService {
         return userProfileRepository.findProfileByUsername(username);
     }
 
-    @Override
-    public User getUser(String username) {
-        return null;
-    }
 
-    @Override
-    public User createUser(User user) {
-        return null;
-    }
 }

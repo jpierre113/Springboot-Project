@@ -9,7 +9,5 @@ public interface UserProfileService {
 
     public UserProfile getUserProfile(String username);
 
-    User getUser(String username);
 
-    User createUser(User user);
 }
