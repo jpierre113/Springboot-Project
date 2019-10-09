@@ -27,19 +27,19 @@ public class User {
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="users_id")
+    @JoinColumn(name="user_profile_id")
     private UserProfile userProfile;
 
 
-    @ManyToOne(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "user_role_id", nullable = false)
-    private UserRole userRole;
+//    @ManyToOne(cascade = {CascadeType.DETACH,
+//            CascadeType.MERGE, CascadeType.REFRESH})
+//    @JoinColumn(name = "user_role_id")
+//    private UserRole userRole;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,
                     CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "users",
+    @JoinTable(name = "users_post",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Posts> posts;
@@ -58,10 +58,17 @@ public class User {
 
     public void setPosts(List<Posts> posts) { this.posts = posts; }
 
-    public UserRole getUserRole() { return userRole; }
+//    public UserRole getUserRole() { return userRole; }
+//
+//    public void setUserRole(UserRole userRole) {
+//        this.userRole = userRole;
+//    }
+
 
 
     public UserProfile getUserProfile() { return userProfile; }
+
+
 
     public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile; }
 
@@ -89,8 +96,8 @@ public class User {
         this.password = password;
     }
 
-    public void setUserRole(UserRole userRole) {
-    }
+
+
 
 
     }

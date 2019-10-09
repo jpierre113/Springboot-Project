@@ -3,7 +3,7 @@ package com.example.springbootspillit.service;
 import com.example.springbootspillit.config.JwtUtil;
 import com.example.springbootspillit.model.Posts;
 import com.example.springbootspillit.model.User;
-import com.example.springbootspillit.model.UserRole;
+//import com.example.springbootspillit.model.UserRole;
 import com.example.springbootspillit.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,8 +24,8 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
     @Autowired
     com.example.springbootspillit.repository.UserRepository userRepository;
 
-    @Autowired
-    com.example.springbootspillit.service.UserRoleService userRoleService;
+//    @Autowired
+//    com.example.springbootspillit.service.UserRoleService userRoleService;
 
     @Autowired
     PostService postService;
@@ -48,16 +48,16 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
             throw new UsernameNotFoundException("User null");
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), bCryptPasswordEncoder.encode(user.getPassword()),
-                true, true, true, true, getGrantedAuthorities(user));
+                true, true, true, true, new ArrayList<>());
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(User user){
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        authorities.add(new SimpleGrantedAuthority(user.getUserRole().getName()));
-
-        return authorities;
-    }
+//    private List<GrantedAuthority> getGrantedAuthorities(User user){
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//        authorities.add(new SimpleGrantedAuthority(user.getUserRole().getName()));
+//
+//        return authorities;
+//    }
 
     @Override
     public User getUser(String username) {
@@ -69,10 +69,15 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
         return userRepository.findAll();
     }
 
+    /**
+     *
+     * @param newUser
+     * @return new user with pw and token
+     */
     @Override
     public String createUser(User newUser) {
-        UserRole userRole = userRoleService.getRole(newUser.getUserRole().getName());
-        newUser.setUserRole(userRole);
+//        UserRole userRole = userRoleService.getRole(newUser.getUserRole().getName());
+//        newUser.setUserRole(userRole);
         newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         if(userRepository.save(newUser) != null){
             UserDetails userDetails = loadUserByUsername(newUser.getUsername());
@@ -81,6 +86,11 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
         return null;
     }
 
+    /**
+     *
+     * @param user
+     * @return find user by username, find pw and return token
+     */
     @Override
     public String login(User user){
         User newUser = userRepository.findByUsername(user.getUsername());
@@ -92,7 +102,12 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
         return null;
     }
 
-
+    /**
+     *
+     * @param username
+     * @param postId
+     * @return save post to user
+     */
 
     @Override
     public User addPost(String username, Long postId) {
@@ -103,6 +118,11 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
         return userRepository.save(user);
     }
 
+    /**
+     *
+     * @param userId
+     * @return delete user by id#
+     */
     @Override
     public HttpStatus deleteById(Long userId){
         userRepository.deleteById(userId);

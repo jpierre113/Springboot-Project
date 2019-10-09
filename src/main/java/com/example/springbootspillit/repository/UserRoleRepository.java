@@ -1,10 +1,11 @@
 package com.example.springbootspillit.repository;
 
 
-import com.example.springbootspillit.model.UserRole;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRoleRepository extends CrudRepository<UserRole, Integer> {
-
-    public UserRole findByName(String name);
-}
+//public interface UserRoleRepository extends CrudRepository<UserRole, Integer> {
+//    @Query("FROM UserRole r WHERE r.name = ?1")
+//    public UserRole findByName(String name);
+//}
