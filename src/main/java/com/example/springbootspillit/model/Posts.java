@@ -14,10 +14,6 @@ public class Posts {
     @Column
     private String title;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="profile_id")
-    private UserProfile userProfile;
-
     @Column
     String body;
 
@@ -31,6 +27,13 @@ public class Posts {
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User user;
+
+    /**
+     * not being used, joins userProfile to post
+     */
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name="profile_id")
+//    private UserProfile userProfile;
 
     public Posts() { }
 
@@ -63,8 +66,8 @@ public class Posts {
         this.user_id = user_id;
     }
 
-    public UserProfile getUserProfile() { return userProfile; }
-    public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile; }
+//    public UserProfile getUserProfile() { return userProfile; }
+//    public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile; }
 
 
 }
