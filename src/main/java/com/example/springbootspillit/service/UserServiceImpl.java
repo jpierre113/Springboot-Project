@@ -110,7 +110,7 @@ public class UserServiceImpl implements com.example.springbootspillit.service.Us
      */
 
     @Override
-    public User addPost(String username, Long postId) {
+    public User addPost(String username, int postId) {
         Posts post = postRepository.findById(postId).get();
         User user = getUser(username);
         user.addPost(post);

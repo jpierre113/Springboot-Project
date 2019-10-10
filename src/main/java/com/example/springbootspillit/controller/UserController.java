@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{username}/{post_id}")
-    public User addPost(@PathVariable String username, @PathVariable Long post_id){
+    public User addPost(@PathVariable String username, @PathVariable int post_id){
         return userService.addPost(username, post_id);
     }
 
