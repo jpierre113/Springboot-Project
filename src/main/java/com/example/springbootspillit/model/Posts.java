@@ -23,7 +23,7 @@ public class Posts {
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,
                     CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "user_posts",
+    @JoinTable(name = "posts_id",
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User user;
