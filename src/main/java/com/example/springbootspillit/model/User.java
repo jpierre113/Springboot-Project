@@ -31,11 +31,6 @@ public class User {
     private UserProfile userProfile;
 
 
-//    @ManyToOne(cascade = {CascadeType.DETACH,
-//            CascadeType.MERGE, CascadeType.REFRESH})
-//    @JoinColumn(name = "user_role_id")
-//    private UserRole userRole;
-
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,
                     CascadeType.MERGE, CascadeType.REFRESH})
@@ -58,17 +53,7 @@ public class User {
 
     public void setPosts(List<Posts> posts) { this.posts = posts; }
 
-//    public UserRole getUserRole() { return userRole; }
-//
-//    public void setUserRole(UserRole userRole) {
-//        this.userRole = userRole;
-//    }
-
-
-
     public UserProfile getUserProfile() { return userProfile; }
-
-
 
     public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile; }
 
