@@ -1,9 +1,7 @@
 package com.example.springbootspillit.repository;
-
 import com.example.springbootspillit.model.Comments;
-import com.example.springbootspillit.model.Posts;
 import org.springframework.data.repository.CrudRepository;
-
-public interface CommentRepository extends CrudRepository<Comments, Integer > {
-
+import org.springframework.stereotype.Repository;
+import java.util.List;
+public interface CommentRepository extends CrudRepository<Comments, Long> {
 }

@@ -1,14 +1,12 @@
 package com.example.springbootspillit.service;
-
 import com.example.springbootspillit.model.Comments;
-import com.example.springbootspillit.model.Posts;
-import org.springframework.http.HttpStatus;
-
 public interface CommentService {
+    //create comment on post using postId
+    public Comments createComment(Comments newComment, Long postId);
 
-    public Comments createComments(Comments comments);
+    //list all comments
+    public Iterable<Comments> listAllComments();
 
-    public Iterable<Comments> listComments();
-
-    public HttpStatus deleteById(int commentId);
+    //delete comment by commentId
+    public void deleteComment(Long commentId);
 }
