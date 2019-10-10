@@ -28,12 +28,6 @@ public class Posts {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User user;
 
-    /**
-     * not being used, joins userProfile to post
-     */
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name="profile_id")
-//    private UserProfile userProfile;
 
     public Posts() { }
 
@@ -65,9 +59,5 @@ public class Posts {
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
-
-//    public UserProfile getUserProfile() { return userProfile; }
-//    public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile; }
-
 
 }
