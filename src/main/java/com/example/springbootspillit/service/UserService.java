@@ -18,6 +18,6 @@ public interface UserService extends UserDetailsService{
 
     public HttpStatus deleteById(Long userId);
 
-    public User addPost(String username, Long postId);
+    public User addPost(String username, int postId);
 
 }

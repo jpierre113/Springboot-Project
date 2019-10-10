@@ -9,5 +9,5 @@ public interface PostService {
 
     public Iterable<Posts> listPosts();
 
-    public HttpStatus deleteById(Long userId);
+    public HttpStatus deleteById(int userId);
 }
