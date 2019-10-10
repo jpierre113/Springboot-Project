@@ -34,7 +34,7 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH,
                     CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "users_post",
+    @JoinTable(name = "users",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Posts> posts;
