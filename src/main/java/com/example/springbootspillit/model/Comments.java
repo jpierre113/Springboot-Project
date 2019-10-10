@@ -25,12 +25,12 @@ public class Comments {
     @JoinTable(name = "posts",
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Posts posts;
+    private Comments comments;
 
     public Comments() { }
 
-    public List<User> getUsers(){ return (List<User>) posts; }
-    public void setUsers(List<User> users) { this.posts = posts; }
+    public List<Posts> getPosts(){ return (List<Posts>) comments; }
+    public void setPosts(List<Posts> comments) { this.comments = (Comments) comments; }
 
     public int getId() {
         return id;
@@ -46,8 +46,8 @@ public class Comments {
         this.body = body;
     }
 
-    public  Long getUser_id() {return post_id;}
-    public void setUser_id(Long post_id) {
+    public  Long getPost_id() {return post_id;}
+    public void setPost_id(Long post_id) {
         this.post_id = post_id;
     }
 
