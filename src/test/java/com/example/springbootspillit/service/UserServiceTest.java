@@ -1,4 +1,6 @@
 package com.example.springbootspillit.service;
+
+
 import com.example.springbootspillit.config.JwtUtil;
 import com.example.springbootspillit.model.User;
 import com.example.springbootspillit.repository.PostRepository;
@@ -12,14 +14,19 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 
     @Mock
     UserRepository userRepository;
+
+    @InjectMocks
+    private UserServiceImpl userService;
 
     @Mock
     private PostService postService;
@@ -34,21 +41,19 @@ public class UserServiceTest {
     private PasswordEncoder passwordEncoder;
 
     @InjectMocks
-    private UserServiceImpl userService;
-
-
-    @InjectMocks
     private User user;
 
-    @Before
-    public void initializeDummyUser() {
-        user.setUsername("red");
-        user.setPassword("blue");
+    public UserServiceTest() {
     }
 
-    // test is successful even with wrong password
+    @Before
+    public void initializeDummyUser(){
+        user.setUsername("green");
+        user.setPassword("green");
+    }
+
     @Test
-    public void getUser_ReturnsUser_Success() {
+    public void getUser_ReturnsUser_Success(){
 
         when(userRepository.findByUsername(anyString())).thenReturn(user);
 
@@ -58,12 +63,12 @@ public class UserServiceTest {
     }
 
     @Test
-    public void login_UserNotFound_Error() {
+    public void login_UserNotFound_Error(){
 
         when(userRepository.findByUsername(anyString())).thenReturn(null);
 
         String token = userService.login(user);
 
-        assertEquals(token, null);
+        assertNull(token);
     }
 }
