@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/signup/**", "/login/**").permitAll()
                 .antMatchers("/user/**", "/profile/**", "/post/**", "/comment/**").authenticated()
+
    //             .antMatchers("/role/**").hasRole("DBA")
                 .and()
                 .httpBasic();

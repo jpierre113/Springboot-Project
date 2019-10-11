@@ -13,20 +13,16 @@ public class PostController {
     @Autowired
     private com.example.springbootspillit.service.PostService postService;
 
-    @GetMapping("/list")
-    public Iterable<Posts> listPosts(){
-        return postService.listPosts();
+    @PostMapping("/addPost/{userId}")
+    public Posts createPost(@PathVariable Long userId, @RequestBody Posts newPost) {
+        return postService.createPost(newPost, userId);
     }
+        @GetMapping("/list")
+        public Iterable<Posts> listPosts(){ return postService.listPosts();}
 
-    @PostMapping("/addPost")
-    public Posts createPost(@RequestBody Posts newPost){
-        return postService.createPost(newPost);
-    }
-
-
-    @DeleteMapping("/{postId}")
-    public void deletePostById(@PathVariable int postId){
+        @DeleteMapping("/{postId}")
+    public void deletePost(@PathVariable int postId){
         postService.deleteById(postId);
-    }
 
+    }
 }

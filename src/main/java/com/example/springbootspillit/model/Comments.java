@@ -1,64 +1,41 @@
 package com.example.springbootspillit.model;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
-import java.util.List;
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "comments")
 public class Comments {
-
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column
-    private String body;
-
-    @Column
-    private Long post_id;
-
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "user_comments",
-            joinColumns = {@JoinColumn(name = "post_id")},
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Comments comments;
-
-    public Comments() {
-    }
-
-    public List<User> getUsers() {
-        return (List<com.example.springbootspillit.model.User>) comments;
-    }
-
-    public void setUsers(List<User> users) {
-        this.comments = comments;
-    }
-
-    public int getId() {
+    @Column(unique = true)
+    private String comment;
+    public Comments(){}
+    public int getId(){
         return id;
     }
-
-    public void setId(int id) {
+    public void setId(int id){
         this.id = id;
     }
-
-    public String getBody() {
-        return body;
+    public String getComments(){
+        return comment;
     }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setComments(String comment){ this.comment = comment;
     }
+    //connecting to comments to  posts
+    @ManyToOne(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "post_id")
 
-    public Long getPost_id() {
-        return post_id;
+    private Posts posts;
+    public Posts getPost(){
+        return posts;
     }
-
-    public void setPost_id(Long post_id) {
-        this.post_id = post_id;
+    public void setPost(Posts posts){
+        this.posts = posts;
     }
 }
-

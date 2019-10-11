@@ -31,12 +31,13 @@ public class User {
     private UserProfile userProfile;
 
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "users_id",
+
+    @OneToMany( mappedBy = "users",
+            cascade = CascadeType.ALL)
+                    //CascadeType.MERGE, CascadeType.REFRESH})
+    //@JoinTable(name = "users_id",
             //joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = @JoinColumn(name = "post_id"))
+            //inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Posts> posts;
 
     public User() {}
