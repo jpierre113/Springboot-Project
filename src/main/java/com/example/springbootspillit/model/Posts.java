@@ -1,8 +1,10 @@
 package com.example.springbootspillit.model;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
-import java.util.List;
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "posts")
 public class Posts {
@@ -10,54 +12,46 @@ public class Posts {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+//    @Column(unique = true)
+    //private String post;
+    //public Posts(){}
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
+   // public String getPosts(){
+    //    return post;
+    //}
+   // public void setPosts(String post){ this.post = post;
+   // }
 
     @Column
     private String title;
 
     @Column
-    String body;
+    private String body;
 
-    @Column
-    private Long user_id;
+   // @Column(unique = true)
+    //private String username;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "posts_id",
-            joinColumns = {@JoinColumn(name = "post_id")},
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private User user;
+    public String getTitle() {return title;}
+    public void setTitle(String title) { this.title = title;}
 
+    public String getBody() {return body;}
+    public void setBody(String body) {this.body = body; }
 
-    public Posts() { }
+    //connecting to posts to  users
+    @ManyToOne(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "user_id")
 
-    public List<User> getUsers(){ return (List<User>) user; }
-    public void setUsers(List<User> users) { this.user = user; }
-
-    public int getId() {
-        return id;
+    private User users;
+    public User getUser(){
+        return users;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setUser(User user){
+        this.users = user;
     }
-
-    public String getTitle() {
-        return title;
     }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public  Long getUser_id() {return user_id;}
-    public void setUser_id(Long user_id) {
-       this.user_id = user_id;
-    }
-
-}

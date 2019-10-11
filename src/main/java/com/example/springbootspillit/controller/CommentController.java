@@ -13,7 +13,7 @@ public class CommentController {
     CommentService commentService;
     //create comments with post id
     @PostMapping("/create/{postId}")
-    public Comments createComment(@PathVariable Long postId, @RequestBody Comments newComment) {
+    public Comments createComment(@PathVariable int postId, @RequestBody Comments newComment) {
         return commentService.createComment(newComment, postId);
     }
     @GetMapping("/list")
@@ -21,8 +21,9 @@ public class CommentController {
         return commentService.listAllComments();
     }
     //delete comment by comment id
+
     @DeleteMapping("/{commentId}")
-    public HttpStatus deleteComment(@PathVariable Long commentId) {
+    public HttpStatus deleteComment(@PathVariable int commentId) {
         commentService.deleteComment(commentId);
         return HttpStatus.OK;
     }

@@ -15,7 +15,7 @@ public class CommentServiceImpl implements CommentService {
     PostRepository postRepository;
     //create comment with post id
     @Override
-    public Comments createComment(Comments newComment, Long postId) {
+    public Comments createComment(Comments newComment, int postId) {
         Posts posts = postRepository.findById(Math.toIntExact(postId)).get();
         newComment.setPost(posts);
         return commentRepository.save(newComment);
@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
     }
     //delete comment by comment id
     @Override
-    public void deleteComment(Long commentId) {
+    public void deleteComment(int commentId) {
         commentRepository.deleteById(commentId);
     }
 }

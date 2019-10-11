@@ -11,20 +11,20 @@ public class Comments {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     @Column(unique = true)
     private String comment;
     public Comments(){}
-    public Long getId(){
+    public int getId(){
         return id;
     }
-    public void setId(Long id){
+    public void setId(int id){
         this.id = id;
     }
-    public String getComment(){
+    public String getComments(){
         return comment;
     }
-    public void setComment(String comment){ this.comment = comment;
+    public void setComments(String comment){ this.comment = comment;
     }
     //connecting to comments to  posts
     @ManyToOne(cascade = {CascadeType.DETACH,

@@ -1,13 +1,12 @@
 package com.example.springbootspillit.service;
 
 import com.example.springbootspillit.model.Posts;
-import org.springframework.http.HttpStatus;
 
 public interface PostService {
 
-    public Posts createPost(Posts posts);
+    public Posts createPost(Posts newPost, Long userId);
 
     public Iterable<Posts> listPosts();
 
-    public HttpStatus deleteById(int userId);
+    public void deleteById(int userId);
 }
