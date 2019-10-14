@@ -31,7 +31,7 @@ Mildly concerning:
 
 What's next to fix:
 
-- Unable to delete a user unless the user has no posts and comments
+- 500 Errors nested exception: Unable to delete a user unless the user has no posts and comments
 - Unable to delete a post unless the posts has no comments
 
 
