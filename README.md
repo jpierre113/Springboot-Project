@@ -2,6 +2,8 @@
 
 Technologies used for this project were Java, Spring Framework, Postgres, SQL and Postman to build a backend for our Reddit-like application.
 
+Project by: Janna Pierre(jpierre113) & Jabari Massey(jbsds)
+
 Our inital design plan for our databases:
 ![Database Schema for Spillit](https://i.imgur.com/HqR9H2K.jpg)
 
